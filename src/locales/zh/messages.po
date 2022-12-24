@@ -100,6 +100,11 @@ msgstr ""
 msgid "APR"
 msgstr "年利率"
 
+#: src/components/TokenCard/TokenCard.js
+#: src/components/TokenCard/TokenCard.js
+msgid "APR:"
+msgstr ""
+
 #: src/components/Stake/GMXAprTooltip.tsx
 #: src/pages/Stake/StakeV2.js
 msgid "APRs are updated weekly on Wednesday and will depend on the fees collected for the week."
@@ -290,11 +295,6 @@ msgstr "核准中"
 msgid "Approving..."
 msgstr "核准中"
 
-#: src/components/TokenCard/TokenCard.js
-#: src/components/TokenCard/TokenCard.js
-msgid "Arbitrum APR:"
-msgstr "Arbitrum年利率"
-
 #: src/pages/Dashboard/DashboardV2.js
 #: src/pages/Dashboard/DashboardV2.js
 msgid "Arbitrum Icon"
@@ -333,18 +333,9 @@ msgstr "可供存入GLP的金额"
 msgid "Available amount to withdraw from GLP. Funds not utilized by current open positions."
 msgstr ""
 
-#: src/pages/Home/Home.js
-msgid "Available on your preferred network"
-msgstr "可在您的首选网络上使用"
-
 #: src/components/Glp/GlpSwap.js
 msgid "Available:"
 msgstr "可用的"
-
-#: src/components/TokenCard/TokenCard.js
-#: src/components/TokenCard/TokenCard.js
-msgid "Avalanche APR:"
-msgstr "Avalanche年利率"
 
 #: src/pages/Dashboard/DashboardV2.js
 #: src/pages/Dashboard/DashboardV2.js
@@ -403,6 +394,8 @@ msgid "Borrow fee"
 msgstr ""
 
 #: src/components/Header/AppHeaderLinks.tsx
+#: src/components/TokenCard/TokenCard.js
+#: src/components/TokenCard/TokenCard.js
 msgid "Buy"
 msgstr "购买"
 
@@ -476,16 +469,6 @@ msgstr ""
 #: src/components/Glp/GlpSwap.js
 msgid "Buy failed."
 msgstr "买入失败"
-
-#: src/components/TokenCard/TokenCard.js
-#: src/components/TokenCard/TokenCard.js
-msgid "Buy on Arbitrum"
-msgstr "在Arbitrum上购买"
-
-#: src/components/TokenCard/TokenCard.js
-#: src/components/TokenCard/TokenCard.js
-msgid "Buy on Avalanche"
-msgstr "在Avalanche上购买"
 
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy or Transfer AVAX to Avalanche"
@@ -775,14 +758,9 @@ msgstr ""
 msgid "Confirm Swap"
 msgstr ""
 
-#: src/components/Header/AppHeaderUser.tsx
-msgid "Connect"
-msgstr "连接"
-
 #: src/App/App.js
 #: src/components/Exchange/SwapBox.js
 #: src/components/Glp/GlpSwap.js
-#: src/components/Header/AppHeaderUser.tsx
 #: src/components/Migration/Migration.js
 #: src/components/Referrals/AddAffiliateCode.js
 #: src/components/Referrals/JoinReferralCode.js
@@ -1376,10 +1354,6 @@ msgstr ""
 msgid "GLP buy disabled, pending {0} upgrade"
 msgstr ""
 
-#: src/components/TokenCard/TokenCard.js
-msgid "GLP is the liquidity provider token. Accrues 70% of the platform's generated fees."
-msgstr "GLP是流动性提供者代币。累积了70%平台产生的费用"
-
 #: src/components/Glp/GlpSwap.js
 msgid "GLP sell disabled, pending {0} upgrade"
 msgstr ""
@@ -1422,8 +1396,8 @@ msgid "GMX Weekly Updates"
 msgstr ""
 
 #: src/pages/BuyGMX/BuyGMX.tsx
-msgid "GMX bonds can be bought on Olympus Pro with a discount and a small vesting period:"
-msgstr "GMX债券可以在Olympus Pro上购买，可获得折扣，并且有较小的归属期"
+msgid "GMX bonds can be bought on Bond Protocol with a discount and a small vesting period:"
+msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.js
 msgid "GMX community discussion"
@@ -1445,17 +1419,9 @@ msgstr ""
 msgid "GMX fundamentals"
 msgstr ""
 
-#: src/pages/Home/Home.js
-msgid "GMX is currently live on Arbitrum and Avalanche."
-msgstr "GMX目前在Arbitrum和Avalanche上线"
-
 #: src/pages/Jobs/Jobs.js
 msgid "GMX is not actively looking for new hires at the moment. However, if you think you can contribute to the project, please email <0>jobs@gmx.io</0>."
 msgstr ""
-
-#: src/components/TokenCard/TokenCard.js
-msgid "GMX is the utility and governance token. Accrues 30% of the platform's generated fees."
-msgstr "GMX是效用和治理代币。拥有30%累积平台产生的费用"
 
 #: src/pages/Ecosystem/Ecosystem.js
 msgid "GMX staking calculator"
@@ -1481,10 +1447,6 @@ msgstr ""
 #: src/pages/Referrals/Referrals.js
 msgid "Get fee discounts and earn rebates through the GMX referral program.<0/>For more information, please read the <1>referral program details</1>."
 msgstr "通过GMX推荐计划获得折扣和赚取回扣。<0/>更多信息，请阅读<1>推荐计划细节</1>。\""
-
-#: src/components/Header/HomeHeaderLinks.tsx
-msgid "Governance"
-msgstr ""
 
 #: src/components/Exchange/SwapBox.js
 msgid "High Slippage, Swap Anyway"
@@ -1829,6 +1791,14 @@ msgstr "最大值"
 
 #: src/pages/Ecosystem/Ecosystem.js
 msgid "MEV Optimizer"
+msgstr ""
+
+#: src/components/TokenCard/TokenCard.js
+msgid "MLP is the liquidity provider token. Accrues 60% of the platform's generated fees."
+msgstr ""
+
+#: src/components/TokenCard/TokenCard.js
+msgid "MMY is the utility and governance token. Accrues 30% of the platform's generated fees."
 msgstr ""
 
 #: src/pages/OrdersOverview/OrdersOverview.js
@@ -3293,7 +3263,7 @@ msgid "Trade"
 msgstr "交易"
 
 #: src/pages/Home/Home.js
-msgid "Trade BTC, ETH, AVAX and other top cryptocurrencies with up to 50x leverage directly from your wallet"
+msgid "Trade BTC, ETH, FTM and other top cryptocurrencies with up to 50x leverage directly from your wallet"
 msgstr ""
 
 #: src/components/Exchange/ExchangeBanner.js
@@ -3596,10 +3566,6 @@ msgstr "该账户的交易量与活跃的推荐代码相关"
 #: src/components/Referrals/AffiliatesStats.js
 msgid "Volume traded by your referred traders."
 msgstr "您推荐交易者的交易量"
-
-#: src/components/Header/HomeHeaderLinks.tsx
-msgid "Voting"
-msgstr ""
 
 #: src/components/Glp/GlpSwap.js
 msgid "WALLET"

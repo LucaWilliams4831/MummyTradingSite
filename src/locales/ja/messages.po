@@ -100,6 +100,11 @@ msgstr ""
 msgid "APR"
 msgstr "APR(実質年利)"
 
+#: src/components/TokenCard/TokenCard.js
+#: src/components/TokenCard/TokenCard.js
+msgid "APR:"
+msgstr ""
+
 #: src/components/Stake/GMXAprTooltip.tsx
 #: src/pages/Stake/StakeV2.js
 msgid "APRs are updated weekly on Wednesday and will depend on the fees collected for the week."
@@ -290,11 +295,6 @@ msgstr "{stakingTokenSymbol}を承認中"
 msgid "Approving..."
 msgstr "承認中"
 
-#: src/components/TokenCard/TokenCard.js
-#: src/components/TokenCard/TokenCard.js
-msgid "Arbitrum APR:"
-msgstr "ArbitrumのAPR(実質年利)"
-
 #: src/pages/Dashboard/DashboardV2.js
 #: src/pages/Dashboard/DashboardV2.js
 msgid "Arbitrum Icon"
@@ -333,18 +333,9 @@ msgstr "GLPに入金可能な金額"
 msgid "Available amount to withdraw from GLP. Funds not utilized by current open positions."
 msgstr ""
 
-#: src/pages/Home/Home.js
-msgid "Available on your preferred network"
-msgstr "選択されたネットワークにて利用可能"
-
 #: src/components/Glp/GlpSwap.js
 msgid "Available:"
 msgstr "利用可能"
-
-#: src/components/TokenCard/TokenCard.js
-#: src/components/TokenCard/TokenCard.js
-msgid "Avalanche APR:"
-msgstr "AvalancheでのAPR(実質年利)"
 
 #: src/pages/Dashboard/DashboardV2.js
 #: src/pages/Dashboard/DashboardV2.js
@@ -403,6 +394,8 @@ msgid "Borrow fee"
 msgstr ""
 
 #: src/components/Header/AppHeaderLinks.tsx
+#: src/components/TokenCard/TokenCard.js
+#: src/components/TokenCard/TokenCard.js
 msgid "Buy"
 msgstr "購入"
 
@@ -476,16 +469,6 @@ msgstr ""
 #: src/components/Glp/GlpSwap.js
 msgid "Buy failed."
 msgstr "購入できませんでした。"
-
-#: src/components/TokenCard/TokenCard.js
-#: src/components/TokenCard/TokenCard.js
-msgid "Buy on Arbitrum"
-msgstr "Arbitrumで購入"
-
-#: src/components/TokenCard/TokenCard.js
-#: src/components/TokenCard/TokenCard.js
-msgid "Buy on Avalanche"
-msgstr "Avalancheで購入"
 
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy or Transfer AVAX to Avalanche"
@@ -775,14 +758,9 @@ msgstr ""
 msgid "Confirm Swap"
 msgstr ""
 
-#: src/components/Header/AppHeaderUser.tsx
-msgid "Connect"
-msgstr "接続"
-
 #: src/App/App.js
 #: src/components/Exchange/SwapBox.js
 #: src/components/Glp/GlpSwap.js
-#: src/components/Header/AppHeaderUser.tsx
 #: src/components/Migration/Migration.js
 #: src/components/Referrals/AddAffiliateCode.js
 #: src/components/Referrals/JoinReferralCode.js
@@ -1376,10 +1354,6 @@ msgstr ""
 msgid "GLP buy disabled, pending {0} upgrade"
 msgstr ""
 
-#: src/components/TokenCard/TokenCard.js
-msgid "GLP is the liquidity provider token. Accrues 70% of the platform's generated fees."
-msgstr "GLPは流動性提供者のトークンです。プラットフォームが得た手数料の70%を獲得します。"
-
 #: src/components/Glp/GlpSwap.js
 msgid "GLP sell disabled, pending {0} upgrade"
 msgstr ""
@@ -1422,7 +1396,7 @@ msgid "GMX Weekly Updates"
 msgstr ""
 
 #: src/pages/BuyGMX/BuyGMX.tsx
-msgid "GMX bonds can be bought on Olympus Pro with a discount and a small vesting period:"
+msgid "GMX bonds can be bought on Bond Protocol with a discount and a small vesting period:"
 msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.js
@@ -1445,17 +1419,9 @@ msgstr ""
 msgid "GMX fundamentals"
 msgstr ""
 
-#: src/pages/Home/Home.js
-msgid "GMX is currently live on Arbitrum and Avalanche."
-msgstr "GMXは現在ArbitrumとAvalancheで稼働中です。"
-
 #: src/pages/Jobs/Jobs.js
 msgid "GMX is not actively looking for new hires at the moment. However, if you think you can contribute to the project, please email <0>jobs@gmx.io</0>."
 msgstr ""
-
-#: src/components/TokenCard/TokenCard.js
-msgid "GMX is the utility and governance token. Accrues 30% of the platform's generated fees."
-msgstr "GMXはユーティリティトークン兼ガバナンストークンです。プラットフォームが得た手数料の30%を獲得します。"
 
 #: src/pages/Ecosystem/Ecosystem.js
 msgid "GMX staking calculator"
@@ -1481,10 +1447,6 @@ msgstr ""
 #: src/pages/Referrals/Referrals.js
 msgid "Get fee discounts and earn rebates through the GMX referral program.<0/>For more information, please read the <1>referral program details</1>."
 msgstr "GMX紹介プログラムで手数料が割引されリベートが得られます。<0/>より詳しくは、 <1>こちらの紹介プログラム詳細を読んでください</1>."
-
-#: src/components/Header/HomeHeaderLinks.tsx
-msgid "Governance"
-msgstr ""
 
 #: src/components/Exchange/SwapBox.js
 msgid "High Slippage, Swap Anyway"
@@ -1829,6 +1791,14 @@ msgstr "最大"
 
 #: src/pages/Ecosystem/Ecosystem.js
 msgid "MEV Optimizer"
+msgstr ""
+
+#: src/components/TokenCard/TokenCard.js
+msgid "MLP is the liquidity provider token. Accrues 60% of the platform's generated fees."
+msgstr ""
+
+#: src/components/TokenCard/TokenCard.js
+msgid "MMY is the utility and governance token. Accrues 30% of the platform's generated fees."
 msgstr ""
 
 #: src/pages/OrdersOverview/OrdersOverview.js
@@ -3293,7 +3263,7 @@ msgid "Trade"
 msgstr "トレード"
 
 #: src/pages/Home/Home.js
-msgid "Trade BTC, ETH, AVAX and other top cryptocurrencies with up to 50x leverage directly from your wallet"
+msgid "Trade BTC, ETH, FTM and other top cryptocurrencies with up to 50x leverage directly from your wallet"
 msgstr ""
 
 #: src/components/Exchange/ExchangeBanner.js
@@ -3596,10 +3566,6 @@ msgstr "有効な紹介コードを使ってこのアカウントでトレード
 #: src/components/Referrals/AffiliatesStats.js
 msgid "Volume traded by your referred traders."
 msgstr "あなたが紹介したトレーダーによる取引高"
-
-#: src/components/Header/HomeHeaderLinks.tsx
-msgid "Voting"
-msgstr ""
 
 #: src/components/Glp/GlpSwap.js
 msgid "WALLET"

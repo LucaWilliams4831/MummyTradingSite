@@ -26,14 +26,14 @@ const HOME_MENUS: HomeLink[] = [
     label: t`Protocol`,
     link: "https://github.com/gmx-io",
   },
-  {
-    label: t`Governance`,
-    link: "https://gov.gmx.io/",
-  },
-  {
-    label: t`Voting`,
-    link: "https://snapshot.org/#/gmx.eth",
-  },
+  // {
+  //   label: t`Governance`,
+  //   link: "https://gov.gmx.io/",
+  // },
+  // {
+  //   label: t`Voting`,
+  //   link: "https://snapshot.org/#/gmx.eth",
+  // },
   {
     label: t`Docs`,
     link: "https://gmxio.gitbook.io/gmx/",

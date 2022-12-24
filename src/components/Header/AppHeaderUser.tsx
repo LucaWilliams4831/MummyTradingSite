@@ -99,7 +99,7 @@ export function AppHeaderUser({
           </HeaderLink>
         </div>
 
-        {showConnectionOptions ? (
+        {/* {showConnectionOptions ? (
           <>
             <ConnectWalletButton onClick={() => setWalletModalVisible(true)} imgSrc={connectWalletImg}>
               {small ? <Trans>Connect</Trans> : <Trans>Connect Wallet</Trans>}
@@ -114,7 +114,7 @@ export function AppHeaderUser({
           </>
         ) : (
           <LanguagePopupHome />
-        )}
+        )} */}
       </div>
     );
   }

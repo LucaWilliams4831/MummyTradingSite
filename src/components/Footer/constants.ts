@@ -35,7 +35,6 @@ export const FOOTER_LINKS: { home: Link[]; app: Link[] } = {
 export const SOCIAL_LINKS: SocialLink[] = [
   { link: "https://twitter.com/GMX_IO", name: "Twitter", icon: twitterIcon },
   { link: "https://medium.com/@gmx.io", name: "Medium", icon: mediumIcon },
-  { link: "https://github.com/gmx-io", name: "Github", icon: githubIcon },
   { link: "https://t.me/GMX_IO", name: "Telegram", icon: telegramIcon },
   { link: "https://discord.gg/cxjZYR4gQK", name: "Discord", icon: discordIcon },
 ];

@@ -27,42 +27,6 @@ export default function Footer({ showRedirectModal, redirectPopupTimestamp }: Pr
             );
           })}
         </div>
-        <div className="Footer-links">
-          {FOOTER_LINKS[isHome ? "home" : "app"].map(({ external, text, link, isAppLink }) => {
-            if (external) {
-              return (
-                <ExternalLink key={text} href={link} className="Footer-link">
-                  {text}
-                </ExternalLink>
-              );
-            }
-            if (isAppLink) {
-              if (shouldShowRedirectModal(redirectPopupTimestamp)) {
-                return (
-                  <div
-                    key={text}
-                    className="Footer-link a"
-                    onClick={() => showRedirectModal && showRedirectModal(link)}
-                  >
-                    {text}
-                  </div>
-                );
-              } else {
-                const baseUrl = getAppBaseUrl();
-                return (
-                  <a key={text} href={baseUrl + link} className="Footer-link">
-                    {text}
-                  </a>
-                );
-              }
-            }
-            return (
-              <NavLink key={link} to={link} className="Footer-link" activeClassName="active">
-                {text}
-              </NavLink>
-            );
-          })}
-        </div>
       </div>
     </div>
   );
