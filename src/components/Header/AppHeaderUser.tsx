@@ -1,9 +1,9 @@
 import { useWeb3React } from "@web3-react/core";
 import AddressDropdown from "../AddressDropdown/AddressDropdown";
-import ConnectWalletButton from "../Common/ConnectWalletButton";
+//import ConnectWalletButton from "../Common/ConnectWalletButton";
 import React, { useCallback, useEffect } from "react";
 import { HeaderLink } from "./HeaderLink";
-import connectWalletImg from "img/ic_wallet_24.svg";
+//import connectWalletImg from "img/ic_wallet_24.svg";
 
 import "./Header.css";
 import { isHomeSite, getAccountUrl } from "lib/legacy";

@@ -2,9 +2,8 @@ import React from "react";
 import cx from "classnames";
 import "./Footer.css";
 import logoImg from "img/ic_gmx_footer.svg";
-import { NavLink } from "react-router-dom";
-import { isHomeSite, getAppBaseUrl, shouldShowRedirectModal } from "lib/legacy";
-import { FOOTER_LINKS, SOCIAL_LINKS } from "./constants";
+import {isHomeSite} from "lib/legacy";
+import {SOCIAL_LINKS} from "./constants";
 import ExternalLink from "components/ExternalLink/ExternalLink";
 
 type Props = { showRedirectModal?: (to: string) => void; redirectPopupTimestamp?: () => void };
