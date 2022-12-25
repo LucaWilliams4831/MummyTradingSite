@@ -26,59 +26,59 @@ const NETWORK_ICON_ALTS = {
 export default function Ecosystem() {
   const gmxPages = [
     {
-      title: "GMX Governance",
+      title: "MUMMY Governance",
       link: "https://gov.gmx.io/",
       linkLabel: "gov.gmx.io",
-      about: t`GMX Governance Page`,
+      about: t`MUMMY Governance Page`,
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Stats",
+      title: "MUMMY Stats",
       link: "https://stats.gmx.io/",
       linkLabel: "stats.gmx.io",
-      about: t`GMX Stats Page`,
+      about: t`MUMMY Stats Page`,
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Proposals",
+      title: "MUMMY Proposals",
       link: "https://snapshot.org/#/gmx.eth",
       linkLabel: "snapshot.org",
-      about: t`GMX Proposals Voting page`,
+      about: t`MUMMY Proposals Voting page`,
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Announcements",
-      link: "https://t.me/GMX_Announcements",
+      title: "MUMMY Announcements",
+      link: "https://t.me/MUMMY_Announcements",
       linkLabel: "t.me",
-      about: t`GMX Announcements and Updates`,
+      about: t`MUMMY Announcements and Updates`,
       chainIds: [ARBITRUM, AVALANCHE],
     },
   ];
 
   const communityProjects = [
     {
-      title: "GMX Blueberry Club",
+      title: "MUMMY Blueberry Club",
       link: "https://www.blueberry.club/",
       linkLabel: "blueberry.club",
-      about: t`GMX Blueberry NFTs`,
+      about: t`MUMMY Blueberry NFTs`,
       creatorLabel: "@xm92boi",
       creatorLink: "https://t.me/xm92boi",
       chainIds: [ARBITRUM],
     },
     {
-      title: "GMX Leaderboard",
+      title: "MUMMY Leaderboard",
       link: "https://www.gmx.house/",
       linkLabel: "gmx.house",
-      about: t`Leaderboard for GMX traders`,
+      about: t`Leaderboard for MUMMY traders`,
       creatorLabel: "@Itburnz",
       creatorLink: "https://t.me/Itburnz",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Positions Bot",
-      link: "https://t.me/GMXPositions",
+      title: "MUMMY Positions Bot",
+      link: "https://t.me/MUMMYPositions",
       linkLabel: "t.me",
-      about: t`Telegram bot for GMX position updates`,
+      about: t`Telegram bot for MUMMY position updates`,
       creatorLabel: "@zhongfu",
       creatorLink: "https://t.me/zhongfu",
       chainIds: [ARBITRUM, AVALANCHE],
@@ -87,7 +87,7 @@ export default function Ecosystem() {
       title: "Blueberry Pulse",
       link: "https://blueberrypulse.substack.com/",
       linkLabel: "substack.com",
-      about: t`GMX Weekly Updates`,
+      about: t`MUMMY Weekly Updates`,
       creatorLabel: "@puroscohiba",
       creatorLink: "https://t.me/puroscohiba",
       chainIds: [ARBITRUM, AVALANCHE],
@@ -102,25 +102,25 @@ export default function Ecosystem() {
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Yield Simulator",
+      title: "MUMMY Yield Simulator",
       link: "https://gmx.defisims.com/",
       linkLabel: "defisims.com",
-      about: t`Yield simulator for GMX`,
+      about: t`Yield simulator for MUMMY`,
       creatorLabel: "@kyzoeth",
       creatorLink: "https://twitter.com/kyzoeth",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Returns Calculator",
+      title: "MUMMY Returns Calculator",
       link: "https://docs.google.com/spreadsheets/u/4/d/1mQZlztz_NpTg5qQiYIzc_Ls1OTLfMOUtmEQN-WW8jj4/copy",
       linkLabel: "docs.google.com",
-      about: t`Returns calculator for GMX and GLP`,
+      about: t`Returns calculator for MUMMY and GLP`,
       creatorLabel: "@AStoicTrader1",
       creatorLink: "https://twitter.com/AStoicTrader1",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Compound Calculator",
+      title: "MUMMY Compound Calculator",
       link: "https://docs.google.com/spreadsheets/d/14DiIE1wZkK9-Y5xSx1PzIgmpcj4ccz1YVw5nwzIWLgI/edit#gid=0",
       linkLabel: "docs.google.com",
       about: t`Optimal compound interval calculator`,
@@ -129,28 +129,28 @@ export default function Ecosystem() {
       chainIds: [AVALANCHE],
     },
     {
-      title: "GMX Trading Stats",
-      link: "https://t.me/GMXTradingStats",
+      title: "MUMMY Trading Stats",
+      link: "https://t.me/MUMMYTradingStats",
       linkLabel: "t.me",
-      about: t`Telegram bot for Open Interest on GMX`,
+      about: t`Telegram bot for Open Interest on MUMMY`,
       creatorLabel: "@SniperMonke01",
       creatorLink: "https://twitter.com/SniperMonke01",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Staking Bot",
-      link: "https://t.me/GMX_Staking_bot",
+      title: "MUMMY Staking Bot",
+      link: "https://t.me/MUMMY_Staking_bot",
       linkLabel: "t.me",
-      about: t`GMX staking rewards updates and insights`,
-      creatorLabel: "@GMX_Staking_bot",
-      creatorLink: "https://twitter.com/GMX_Staking_bot",
+      about: t`MUMMY staking rewards updates and insights`,
+      creatorLabel: "@MUMMY_Staking_bot",
+      creatorLink: "https://twitter.com/MUMMY_Staking_bot",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Staking Calculator",
+      title: "MUMMY Staking Calculator",
       link: "https://gmxstaking.com",
       linkLabel: "gmxstaking.com",
-      about: t`GMX staking calculator`,
+      about: t`MUMMY staking calculator`,
       creatorLabel: "@n1njawtf",
       creatorLink: "https://t.me/n1njawtf",
       chainIds: [ARBITRUM, AVALANCHE],
@@ -159,25 +159,25 @@ export default function Ecosystem() {
 
   const dashboardProjects = [
     {
-      title: "GMX Referrals Dashboard",
+      title: "MUMMY Referrals Dashboard",
       link: "https://www.gmxreferrals.com/",
       linkLabel: "gmxreferrals.com",
-      about: t`Dashboard for GMX referral stats`,
+      about: t`Dashboard for MUMMY referral stats`,
       creatorLabel: "@kyzoeth",
       creatorLink: "https://twitter.com/kyzoeth",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
-      title: "GMX Terminal",
+      title: "MUMMY Terminal",
       link: "https://gmxterminal.com",
       linkLabel: "gmxterminal.com",
-      about: t`GMX explorer for stats and traders`,
+      about: t`MUMMY explorer for stats and traders`,
       creatorLabel: "@vipineth",
       creatorLink: "https://t.me/vipineth",
       chainIds: [ARBITRUM],
     },
     {
-      title: "GMX Analytics",
+      title: "MUMMY Analytics",
       link: "https://gmxstats.com/",
       linkLabel: "gmxstats.com",
       about: t`Financial reports and protocol analytics`,
@@ -189,7 +189,7 @@ export default function Ecosystem() {
       title: "TokenTerminal",
       link: "https://tokenterminal.com/terminal/projects/gmx",
       linkLabel: "tokenterminal.com",
-      about: t`GMX fundamentals`,
+      about: t`MUMMY fundamentals`,
       creatorLabel: "@tokenterminal",
       creatorLink: "https://twitter.com/tokenterminal",
       chainIds: [ARBITRUM, AVALANCHE],
@@ -198,7 +198,7 @@ export default function Ecosystem() {
       title: "CryptoFees",
       link: "https://cryptofees.info",
       linkLabel: "cryptofees.info",
-      about: t`Fees generated by GMX`,
+      about: t`Fees generated by MUMMY`,
       creatorLabel: "@CryptoFeesInfo",
       creatorLink: "https://twitter.com/CryptoFeesInfo",
       chainIds: [ARBITRUM, AVALANCHE],
@@ -222,16 +222,16 @@ export default function Ecosystem() {
       chainIds: [AVALANCHE],
     },
     {
-      title: "GMX Perpetuals Data",
-      link: "https://app.laevitas.ch/altsderivs/GMX/perpetualswaps",
+      title: "MUMMY Perpetuals Data",
+      link: "https://app.laevitas.ch/altsderivs/MUMMY/perpetualswaps",
       linkLabel: "laevitas.ch",
-      about: t`GMX Perpetuals Data`,
+      about: t`MUMMY Perpetuals Data`,
       creatorLabel: "@laevitas1",
       creatorLink: "https://twitter.com/laevitas1",
       chainIds: [ARBITRUM],
     },
     {
-      title: "GMX Blueberry Leaderboard",
+      title: "MUMMY Blueberry Leaderboard",
       link: "https://www.blueberryboard.com",
       linkLabel: "blueberryboard.com",
       about: t`GBC NFTs APR tracker and rewards`,
@@ -248,7 +248,7 @@ export default function Ecosystem() {
       linkLabe: "debank.com",
       about: t`DeFi Portfolio Tracker`,
       announcementLabel: "twitter.com",
-      announcementLink: "https://twitter.com/GMX_IO/status/1439711532884152324",
+      announcementLink: "https://twitter.com/MUMMY_IO/status/1439711532884152324",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
@@ -257,7 +257,7 @@ export default function Ecosystem() {
       linkLabel: "defillama.com",
       about: t`Decentralized Finance Dashboard`,
       announcementLabel: "twitter.com",
-      announcementLink: "https://twitter.com/GMX_IO/status/1438124768033660938",
+      announcementLink: "https://twitter.com/MUMMY_IO/status/1438124768033660938",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
@@ -266,7 +266,7 @@ export default function Ecosystem() {
       linkLabel: "dopex.io",
       about: t`Decentralized Options Protocol`,
       announcementLabel: "twitter.com",
-      announcementLink: "https://twitter.com/GMX_IO/status/1482445801523716099",
+      announcementLink: "https://twitter.com/MUMMY_IO/status/1482445801523716099",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
@@ -284,7 +284,7 @@ export default function Ecosystem() {
       linkLabel: "jonesdao.io",
       about: t`Decentralized Options Strategies`,
       announcementLabel: "twitter.com",
-      announcementLink: "https://twitter.com/GMX_IO/status/1482788805635678212",
+      announcementLink: "https://twitter.com/MUMMY_IO/status/1482788805635678212",
       chainIds: [ARBITRUM],
     },
     {
@@ -293,7 +293,7 @@ export default function Ecosystem() {
       linkLabel: "yieldyak.com",
       about: t`Yield Optimizer on Avalanche`,
       announcementLabel: "twitter.com",
-      announcementLink: "https://twitter.com/GMX_IO/status/1484601407378378754",
+      announcementLink: "https://twitter.com/MUMMY_IO/status/1484601407378378754",
       chainIds: [AVALANCHE],
     },
     {
@@ -320,7 +320,7 @@ export default function Ecosystem() {
       linkLabel: "dodoex.io",
       about: t`Decentralized Trading Protocol`,
       announcementLabel: "twitter.com",
-      announcementLink: "https://twitter.com/GMX_IO/status/1438899138549145605",
+      announcementLink: "https://twitter.com/MUMMY_IO/status/1438899138549145605",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
@@ -329,7 +329,7 @@ export default function Ecosystem() {
       linkLabel: "openocean.finance",
       about: t`DEX Aggregator`,
       announcementLabel: "twitter.com",
-      announcementLink: "https://twitter.com/GMX_IO/status/1495780826016989191",
+      announcementLink: "https://twitter.com/MUMMY_IO/status/1495780826016989191",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
@@ -347,7 +347,7 @@ export default function Ecosystem() {
       linkLabel: "1inch.io",
       about: t`DEX Aggregator`,
       announcementLabel: "twitter.com",
-      announcementLink: "https://twitter.com/GMX_IO/status/1522247451410845696",
+      announcementLink: "https://twitter.com/MUMMY_IO/status/1522247451410845696",
       chainIds: [ARBITRUM, AVALANCHE],
     },
     {
@@ -372,28 +372,28 @@ export default function Ecosystem() {
 
   const telegramGroups = [
     {
-      title: "GMX",
-      link: "https://t.me/GMX_IO",
+      title: "MUMMY",
+      link: "https://t.me/MUMMY_IO",
       linkLabel: "t.me",
       about: t`Telegram Group`,
     },
     {
-      title: "GMX (Chinese)",
+      title: "MUMMY (Chinese)",
       link: "https://t.me/gmxch",
       linkLabel: "t.me",
       about: t`Telegram Group (Chinese)`,
     },
     {
-      title: "GMX (Portuguese)",
-      link: "https://t.me/GMX_Portuguese",
+      title: "MUMMY (Portuguese)",
+      link: "https://t.me/MUMMY_Portuguese",
       linkLabel: "t.me",
       about: t`Telegram Group (Portuguese)`,
     },
     {
-      title: "GMX Trading Chat",
+      title: "MUMMY Trading Chat",
       link: "https://t.me/gambittradingchat",
       linkLabel: "t.me",
-      about: t`GMX community discussion`,
+      about: t`MUMMY community discussion`,
     },
   ];
 
@@ -405,10 +405,10 @@ export default function Ecosystem() {
             <div className="section-title-icon" />
             <div className="section-title-content">
               <div className="Page-title">
-                <Trans>GMX Pages</Trans>
+                <Trans>MUMMY Pages</Trans>
               </div>
               <div className="Page-description">
-                <Trans>GMX ecosystem pages.</Trans>
+                <Trans>MUMMY ecosystem pages.</Trans>
               </div>
             </div>
           </div>
@@ -451,7 +451,7 @@ export default function Ecosystem() {
               <Trans>Community Projects</Trans>
             </div>
             <div className="Page-description">
-              <Trans>Projects developed by the GMX community.</Trans>
+              <Trans>Projects developed by the MUMMY community.</Trans>
             </div>
           </div>
           <div className="DashboardV2-projects">
@@ -501,7 +501,7 @@ export default function Ecosystem() {
               <Trans>Dashboards</Trans>
             </div>
             <div className="Page-description">
-              <Trans>GMX dashboards and analytics.</Trans>
+              <Trans>MUMMY dashboards and analytics.</Trans>
             </div>
           </div>
           <div className="DashboardV2-projects">
@@ -552,7 +552,7 @@ export default function Ecosystem() {
               <Trans>Partnerships and Integrations</Trans>
             </div>
             <div className="Page-description">
-              <Trans>Projects integrated with GMX.</Trans>
+              <Trans>Projects integrated with MUMMY.</Trans>
             </div>
           </div>
           <div className="DashboardV2-projects">
