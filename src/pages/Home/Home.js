@@ -151,7 +151,7 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
             </div>
             <div className="Home-description">
               <Trans>
-                Trade BTC, ETH, AVAX and other top cryptocurrencies with up to 50x leverage directly from your wallet
+                Trade BTC, ETH, FTM and other top cryptocurrencies with up to 50x leverage directly from your wallet
               </Trans>
             </div>
             <LaunchExchangeButton />
@@ -229,42 +229,6 @@ export default function Home({ showRedirectModal, redirectPopupTimestamp }) {
                 Open positions through a simple swap interface. Conveniently swap from any supported asset into the
                 position of your choice.
               </Trans>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="Home-cta-section">
-        <div className="Home-cta-container default-container">
-          <div className="Home-cta-info">
-            <div className="Home-cta-info__title">
-              <Trans>Available on your preferred network</Trans>
-            </div>
-            <div className="Home-cta-info__description">
-              <Trans>GMX is currently live on Arbitrum and Avalanche.</Trans>
-            </div>
-          </div>
-          <div className="Home-cta-options">
-            <div className="Home-cta-option Home-cta-option-arbitrum">
-              <div className="Home-cta-option-icon">
-                <img src={arbitrumIcon} alt="Arbitrum Icon" />
-              </div>
-              <div className="Home-cta-option-info">
-                <div className="Home-cta-option-title">Arbitrum</div>
-                <div className="Home-cta-option-action">
-                  <LaunchExchangeButton />
-                </div>
-              </div>
-            </div>
-            <div className="Home-cta-option Home-cta-option-ava">
-              <div className="Home-cta-option-icon">
-                <img src={avaIcon} alt="Avalanche Icon" />
-              </div>
-              <div className="Home-cta-option-info">
-                <div className="Home-cta-option-title">Avalanche</div>
-                <div className="Home-cta-option-action">
-                  <LaunchExchangeButton />
-                </div>
-              </div>
             </div>
           </div>
         </div>
