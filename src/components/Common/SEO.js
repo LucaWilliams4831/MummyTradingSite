@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet";
 function SEO(props) {
   const { children, ...customMeta } = props;
   const meta = {
-    title: "GMX | Decentralized Perpetual Exchange",
+    title: "MUMMY | The SuperDEX for Perpetual Trading",
     description:
-      "Trade spot or perpetual BTC, ETH, AVAX and other top cryptocurrencies with up to 50x leverage directly from your wallet on Arbitrum and Avalanche.",
+      "Trade spot or perpetual BTC, ETH, FTM and other top cryptocurrencies with up to 50x leverage directly from your wallet on Fantom and Avalanche.",
     image: "https://gmx.io/og.png",
     type: "exchange",
     ...customMeta,

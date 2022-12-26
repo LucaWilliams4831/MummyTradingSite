@@ -61,7 +61,7 @@ export default function TokenCard({ showRedirectModal, redirectPopupTimestamp })
     <div className="Home-token-card-options">
       <div className="Home-token-card-option">
         <div className="Home-token-card-option-icon">
-          <img src={gmxBigIcon} alt="gmxBigIcon" /> GMX
+          <img src={gmxBigIcon} alt="gmxBigIcon" /> MMY
         </div>
         <div className="Home-token-card-option-info">
           <div className="Home-token-card-option-title">
@@ -87,7 +87,7 @@ export default function TokenCard({ showRedirectModal, redirectPopupTimestamp })
       </div>
       <div className="Home-token-card-option">
         <div className="Home-token-card-option-icon">
-          <img src={glpBigIcon} alt="glpBigIcon" /> GLP
+          <img src={glpBigIcon} alt="glpBigIcon" /> MLP
         </div>
         <div className="Home-token-card-option-info">
           <div className="Home-token-card-option-title">
