@@ -9,9 +9,8 @@ import { isHomeSite } from "lib/legacy";
 
 import { useWeb3React } from "@web3-react/core";
 
-import APRLabel from "../APRLabel/APRLabel";
 import { HeaderLink } from "../Header/HeaderLink";
-import { ARBITRUM, AVALANCHE } from "config/chains";
+import { ARBITRUM } from "config/chains";
 import { switchNetwork } from "lib/wallets";
 import { useChainId } from "lib/chains";
 import ExternalLink from "components/ExternalLink/ExternalLink";
@@ -66,22 +65,21 @@ export default function TokenCard({ showRedirectModal, redirectPopupTimestamp })
         </div>
         <div className="Home-token-card-option-info">
           <div className="Home-token-card-option-title">
-            <Trans>GMX is the utility and governance token. Accrues 30% of the platform's generated fees.</Trans>
+            <Trans>MMY is the utility and governance token, Accrues 30% of the platform's generated fees.</Trans>
           </div>
-          <div className="Home-token-card-option-apr">
-            <Trans>Arbitrum APR:</Trans> <APRLabel chainId={ARBITRUM} label="gmxAprTotal" />,{" "}
-            <Trans>Avalanche APR:</Trans> <APRLabel chainId={AVALANCHE} label="gmxAprTotal" key="AVALANCHE" />
-          </div>
+          <div className="Home-token-card-option-apr">61.04%</div>
           <div className="Home-token-card-option-action">
             <div className="buy">
-              <BuyLink to="/buy_gmx" className="default-btn" network={ARBITRUM}>
-                <Trans>Buy on Arbitrum</Trans>
-              </BuyLink>
-              <BuyLink to="/buy_gmx" className="default-btn" network={AVALANCHE}>
-                <Trans>Buy on Avalanche</Trans>
-              </BuyLink>
+              <a
+                href="https://spooky.fi/#/swap?inputCurrency=0x04068DA6C83AFCFA0e13ba15A6696662335D5B75&outputCurrency=0x01e77288b38b416F972428d562454fb329350bAc"
+                class="link-underline default-btn read-more"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Buy
+              </a>
             </div>
-            <ExternalLink href="https://gmxio.gitbook.io/gmx/tokenomics" className="default-btn read-more">
+            <ExternalLink href="https://docs.mummy.finance/tokenomics" className="default-btn read-more">
               <Trans>Read more</Trans>
             </ExternalLink>
           </div>
@@ -93,27 +91,16 @@ export default function TokenCard({ showRedirectModal, redirectPopupTimestamp })
         </div>
         <div className="Home-token-card-option-info">
           <div className="Home-token-card-option-title">
-            <Trans>GLP is the liquidity provider token. Accrues 70% of the platform's generated fees.</Trans>
+            <Trans>MLP is the liquiditiy provider token. Accrues 60% of the platform's generated fees.</Trans>
           </div>
-          <div className="Home-token-card-option-apr">
-            <Trans>Arbitrum APR:</Trans> <APRLabel chainId={ARBITRUM} label="glpAprTotal" key="ARBITRUM" />,{" "}
-            <Trans>Avalanche APR:</Trans> <APRLabel chainId={AVALANCHE} label="glpAprTotal" key="AVALANCHE" />
-          </div>
+          <div className="Home-token-card-option-apr">APR: 101.77%</div>
           <div className="Home-token-card-option-action">
             <div className="buy">
-              <BuyLink to="/buy_glp" className="default-btn" network={ARBITRUM}>
-                <Trans>Buy on Arbitrum</Trans>
-              </BuyLink>
-              <BuyLink to="/buy_glp" className="default-btn" network={AVALANCHE}>
-                <Trans>Buy on Avalanche</Trans>
+              <BuyLink to="/buy_mlp" className="default-btn" network={ARBITRUM}>
+                <Trans>Buy</Trans>
               </BuyLink>
             </div>
-            <a
-              href="https://gmxio.gitbook.io/gmx/glp"
-              target="_blank"
-              rel="noreferrer"
-              className="default-btn read-more"
-            >
+            <a href="https://docs.mummy.finance/mlp" target="_blank" rel="noreferrer" className="default-btn read-more">
               <Trans>Read more</Trans>
             </a>
           </div>

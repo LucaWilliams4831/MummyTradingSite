@@ -334,8 +334,8 @@ msgid "Available amount to withdraw from GLP. Funds not utilized by current open
 msgstr ""
 
 #: src/pages/Home/Home.js
-msgid "Available on your preferred network"
-msgstr "選択されたネットワークにて利用可能"
+#~ msgid "Available on your preferred network"
+#~ msgstr "選択されたネットワークにて利用可能"
 
 #: src/components/Glp/GlpSwap.js
 msgid "Available:"
@@ -1446,8 +1446,8 @@ msgid "GMX fundamentals"
 msgstr ""
 
 #: src/pages/Home/Home.js
-msgid "GMX is currently live on Arbitrum and Avalanche."
-msgstr "GMXは現在ArbitrumとAvalancheで稼働中です。"
+#~ msgid "GMX is currently live on Arbitrum and Avalanche."
+#~ msgstr "GMXは現在ArbitrumとAvalancheで稼働中です。"
 
 #: src/pages/Jobs/Jobs.js
 msgid "GMX is not actively looking for new hires at the moment. However, if you think you can contribute to the project, please email <0>jobs@gmx.io</0>."
@@ -1483,8 +1483,8 @@ msgid "Get fee discounts and earn rebates through the GMX referral program.<0/>F
 msgstr "GMX紹介プログラムで手数料が割引されリベートが得られます。<0/>より詳しくは、 <1>こちらの紹介プログラム詳細を読んでください</1>."
 
 #: src/components/Header/HomeHeaderLinks.tsx
-msgid "Governance"
-msgstr ""
+#~ msgid "Governance"
+#~ msgstr ""
 
 #: src/components/Exchange/SwapBox.js
 msgid "High Slippage, Swap Anyway"
@@ -3293,7 +3293,11 @@ msgid "Trade"
 msgstr "トレード"
 
 #: src/pages/Home/Home.js
-msgid "Trade BTC, ETH, AVAX and other top cryptocurrencies with up to 50x leverage directly from your wallet"
+#~ msgid "Trade BTC, ETH, AVAX and other top cryptocurrencies with up to 50x leverage directly from your wallet"
+#~ msgstr ""
+
+#: src/pages/Home/Home.js
+msgid "Trade BTC, ETH, FTM and other top cryptocurrencies with up to 50x leverage directly from your wallet"
 msgstr ""
 
 #: src/components/Exchange/ExchangeBanner.js
@@ -3598,8 +3602,8 @@ msgid "Volume traded by your referred traders."
 msgstr "あなたが紹介したトレーダーによる取引高"
 
 #: src/components/Header/HomeHeaderLinks.tsx
-msgid "Voting"
-msgstr ""
+#~ msgid "Voting"
+#~ msgstr ""
 
 #: src/components/Glp/GlpSwap.js
 msgid "WALLET"
