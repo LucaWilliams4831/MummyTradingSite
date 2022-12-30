@@ -7,7 +7,7 @@ import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import TooltipComponent from "components/Tooltip/Tooltip";
 
 import hexToRgba from "hex-to-rgba";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 
 import {
   USD_DECIMALS,
@@ -19,7 +19,7 @@ import {
   importImage,
   arrayURLFetcher,
 } from "lib/legacy";
-import { useTotalGmxInLiquidity, useGmxPrice, useTotalGmxStaked, useTotalGmxSupply } from "domain/legacy";
+import { useTotalGmxInLiquidity, useGmxPrice, useTotalGmxStaked, useMMYInfo } from "domain/legacy";
 import useFeesSummary from "domain/useFeesSummary";
 
 import { getContract } from "config/contracts";
@@ -37,22 +37,23 @@ import avalanche16Icon from "img/ic_avalanche_16.svg";
 import arbitrum16Icon from "img/ic_arbitrum_16.svg";
 import arbitrum24Icon from "img/ic_arbitrum_24.svg";
 import avalanche24Icon from "img/ic_avalanche_24.svg";
-
+import ftm16Icon from "img/ic_arbitrum_16.svg";
+import ftm24Icon from "img/ic_arbitrum_24.svg";
 import AssetDropdown from "./AssetDropdown";
 import ExternalLink from "components/ExternalLink/ExternalLink";
 import SEO from "components/Common/SEO";
 import useTotalVolume from "domain/useTotalVolume";
 import StatsTooltip from "components/StatsTooltip/StatsTooltip";
 import StatsTooltipRow from "components/StatsTooltip/StatsTooltipRow";
-import { ARBITRUM, AVALANCHE, getChainName } from "config/chains";
+import { ARBITRUM, AVALANCHE, FANTOM, getChainName } from "config/chains";
 import { getServerUrl } from "config/backend";
 import { contractFetcher } from "lib/contracts";
 import { useInfoTokens } from "domain/tokens";
 import { getTokenBySymbol, getWhitelistedTokens, GLP_POOL_COLORS } from "config/tokens";
-import { bigNumberify, expandDecimals, formatAmount, formatKeyAmount, numberWithCommas } from "lib/numbers";
+import { bigNumberify, expandDecimals, formatAmount, formatKeyAmount, parseValue } from "lib/numbers";
 import { useChainId } from "lib/chains";
 import { formatDate } from "lib/dates";
-const ACTIVE_CHAIN_IDS = [ARBITRUM, AVALANCHE];
+const ACTIVE_CHAIN_IDS = [FANTOM];
 
 const { AddressZero } = ethers.constants;
 
@@ -132,29 +133,34 @@ function getCurrentFeesUsd(tokenAddresses, fees, infoTokens) {
 export default function DashboardV2() {
   const { active, library } = useWeb3React();
   const { chainId } = useChainId();
-  const totalVolume = useTotalVolume();
+  // const totalVolume = useTotalVolume();
 
   const chainName = getChainName(chainId);
-
-  const { data: positionStats } = useSWR(
-    ACTIVE_CHAIN_IDS.map((chainId) => getServerUrl(chainId, "/position_stats")),
+  const { data: dataStats } = useSWR(
+    getServerUrl(chainId, "/app-stats"),
     {
       fetcher: arrayURLFetcher,
     }
   );
+  // console.log('####dataStats',dataStats);
+  // const { data: positionStats } = useSWR(
+  //   ACTIVE_CHAIN_IDS.map((chainId) => getServerUrl(chainId, "/position_stats")),
+  //   {
+  //     fetcher: arrayURLFetcher,
+  //   }
+  // );
 
-  const { data: hourlyVolumes } = useSWR(
-    ACTIVE_CHAIN_IDS.map((chainId) => getServerUrl(chainId, "/hourly_volume")),
-    {
-      fetcher: arrayURLFetcher,
-    }
-  );
+  // const { data: hourlyVolumes } = useSWR(
+  //   ACTIVE_CHAIN_IDS.map((chainId) => getServerUrl(chainId, "/hourly_volume")),
+  //   {
+  //     fetcher: arrayURLFetcher,
+  //   }
+  // );
 
-  let { total: totalGmxSupply } = useTotalGmxSupply();
+  
+  // const currentVolumeInfo = getVolumeInfo(hourlyVolumes);
 
-  const currentVolumeInfo = getVolumeInfo(hourlyVolumes);
-
-  const positionStatsInfo = getPositionStats(positionStats);
+  // const positionStatsInfo = getPositionStats(positionStats);
 
   function getWhitelistedTokenAddresses(chainId) {
     const whitelistedTokens = getWhitelistedTokens(chainId);
@@ -192,76 +198,85 @@ export default function DashboardV2() {
       fetcher: contractFetcher(library, VaultV2),
     }
   );
-
+// let { total: totalGmxSupply } = useTotalGmxSupply();
+  // let totalGmxSupply = mmyInfo BigNumber.from("10000000000000000000000000")
+  const { gmxPrice } = useGmxPrice(chainId, {}, active);
+  let totalGmxSupply
+  if(totalSupplies && totalSupplies[1]) {
+    totalGmxSupply = totalSupplies[1]
+  }
+  // const { totalGmxSupply: totalGmxSupply2, gmxPrice:gmxPrice2, totalSupply } = useMMYInfo();
+  // console.log('###',totalGmxSupply,totalGmxSupply2);
   const { infoTokens } = useInfoTokens(library, chainId, active, undefined, undefined);
-  const { infoTokens: infoTokensArbitrum } = useInfoTokens(null, ARBITRUM, active, undefined, undefined);
-  const { infoTokens: infoTokensAvax } = useInfoTokens(null, AVALANCHE, active, undefined, undefined);
+  // const { infoTokens: infoTokensArbitrum } = useInfoTokens(null, ARBITRUM, active, undefined, undefined);
+  // const { infoTokens: infoTokensAvax } = useInfoTokens(null, AVALANCHE, active, undefined, undefined);
 
-  const { data: currentFees } = useSWR(
-    infoTokensArbitrum[AddressZero].contractMinPrice && infoTokensAvax[AddressZero].contractMinPrice
-      ? "Dashboard:currentFees"
-      : null,
-    {
-      fetcher: () => {
-        return Promise.all(
-          ACTIVE_CHAIN_IDS.map((chainId) =>
-            contractFetcher(null, ReaderV2, [getWhitelistedTokenAddresses(chainId)])(
-              `Dashboard:fees:${chainId}`,
-              chainId,
-              getContract(chainId, "Reader"),
-              "getFees",
-              getContract(chainId, "Vault")
-            )
-          )
-        ).then((fees) => {
-          return fees.reduce(
-            (acc, cv, i) => {
-              const feeUSD = getCurrentFeesUsd(
-                getWhitelistedTokenAddresses(ACTIVE_CHAIN_IDS[i]),
-                cv,
-                ACTIVE_CHAIN_IDS[i] === ARBITRUM ? infoTokensArbitrum : infoTokensAvax
-              );
-              acc[ACTIVE_CHAIN_IDS[i]] = feeUSD;
-              acc.total = acc.total.add(feeUSD);
-              return acc;
-            },
-            { total: bigNumberify(0) }
-          );
-        });
-      },
-    }
-  );
+  // const { data: currentFees } = useSWR(
+  //   infoTokensArbitrum[AddressZero].contractMinPrice && infoTokensAvax[AddressZero].contractMinPrice
+  //     ? "Dashboard:currentFees"
+  //     : null,
+  //   {
+  //     fetcher: () => {
+  //       return Promise.all(
+  //         ACTIVE_CHAIN_IDS.map((chainId) =>
+  //           contractFetcher(null, ReaderV2, [getWhitelistedTokenAddresses(chainId)])(
+  //             `Dashboard:fees:${chainId}`,
+  //             chainId,
+  //             getContract(chainId, "Reader"),
+  //             "getFees",
+  //             getContract(chainId, "Vault")
+  //           )
+  //         )
+  //       ).then((fees) => {
+  //         return fees.reduce(
+  //           (acc, cv, i) => {
+  //             const feeUSD = getCurrentFeesUsd(
+  //               getWhitelistedTokenAddresses(ACTIVE_CHAIN_IDS[i]),
+  //               cv,
+  //               ACTIVE_CHAIN_IDS[i] === ARBITRUM ? infoTokensArbitrum : infoTokensAvax
+  //             );
+  //             acc[ACTIVE_CHAIN_IDS[i]] = feeUSD;
+  //             acc.total = acc.total.add(feeUSD);
+  //             return acc;
+  //           },
+  //           { total: bigNumberify(0) }
+  //         );
+  //       });
+  //     },
+  //   }
+  // );
 
-  const { data: feesSummaryByChain } = useFeesSummary();
-  const feesSummary = feesSummaryByChain[chainId];
+  // const { data: feesSummaryByChain } = useFeesSummary();
+  // const feesSummary = feesSummaryByChain[chainId];
 
   const eth = infoTokens[getTokenBySymbol(chainId, "ETH").address];
-  const shouldIncludeCurrrentFees =
-    feesSummaryByChain[chainId].lastUpdatedAt &&
-    parseInt(Date.now() / 1000) - feesSummaryByChain[chainId].lastUpdatedAt > 60 * 60;
+  // const shouldIncludeCurrrentFees =
+  //   feesSummaryByChain[chainId].lastUpdatedAt &&
+  //   parseInt(Date.now() / 1000) - feesSummaryByChain[chainId].lastUpdatedAt > 60 * 60;
 
-  const totalFees = ACTIVE_CHAIN_IDS.map((chainId) => {
-    if (shouldIncludeCurrrentFees && currentFees && currentFees[chainId]) {
-      return currentFees[chainId].div(expandDecimals(1, USD_DECIMALS)).add(feesSummaryByChain[chainId].totalFees || 0);
-    }
+  // const totalFees = ACTIVE_CHAIN_IDS.map((chainId) => {
+  //   if (shouldIncludeCurrrentFees && currentFees && currentFees[chainId]) {
+  //     return currentFees[chainId].div(expandDecimals(1, USD_DECIMALS)).add(feesSummaryByChain[chainId].totalFees || 0);
+  //   }
 
-    return feesSummaryByChain[chainId].totalFees || 0;
-  })
-    .map((v) => Math.round(v))
-    .reduce(
-      (acc, cv, i) => {
-        acc[ACTIVE_CHAIN_IDS[i]] = cv;
-        acc.total = acc.total + cv;
-        return acc;
-      },
-      { total: 0 }
-    );
+  //   return feesSummaryByChain[chainId].totalFees || 0;
+  // })
+  //   .map((v) => Math.round(v))
+  //   .reduce(
+  //     (acc, cv, i) => {
+  //       acc[ACTIVE_CHAIN_IDS[i]] = cv;
+  //       acc.total = acc.total + cv;
+  //       return acc;
+  //     },
+  //     { total: 0 }
+  //   );
 
-  const { gmxPrice, gmxPriceFromArbitrum, gmxPriceFromAvalanche } = useGmxPrice(
-    chainId,
-    { arbitrum: chainId === ARBITRUM ? library : undefined },
-    active
-  );
+  // const { gmxPriceFromArbitrum, gmxPriceFromAvalanche } = useGmxPrice(
+  //   chainId,
+  //   { arbitrum: chainId === ARBITRUM ? library : undefined },
+  //   active
+  // );
+  // const gmxPrice = BigNumber.from("1000000000000000000000000000000")
 
   let { total: totalGmxInLiquidity } = useTotalGmxInLiquidity(chainId, active);
 
@@ -369,8 +384,8 @@ export default function DashboardV2() {
                     <br />
                     <br />
                     Get lower fees to{" "}
-                    <Link to="/buy_glp" target="_blank" rel="noopener noreferrer">
-                      buy GLP
+                    <Link to="/buy_mlp" target="_blank" rel="noopener noreferrer">
+                      buy MLP
                     </Link>{" "}
                     with {tokenInfo.symbol},&nbsp; and to{" "}
                     <Link to="/trade" target="_blank" rel="noopener noreferrer">
@@ -396,7 +411,7 @@ export default function DashboardV2() {
               )}
               <br />
               <div>
-                <ExternalLink href="https://gmxio.gitbook.io/gmx/glp">
+                <ExternalLink href="https://docs.mummy.finance/mlp">
                   <Trans>More Info</Trans>
                 </ExternalLink>
               </div>
@@ -439,7 +454,7 @@ export default function DashboardV2() {
     },
   ];
 
-  const totalStatsStartDate = chainId === AVALANCHE ? t`06 Jan 2022` : t`01 Sep 2021`;
+  const totalStatsStartDate = chainId === AVALANCHE ? t`06 Jan 2022` : t`05 Dec 2022`;
 
   let stableGlp = 0;
   let totalGlp = 0;
@@ -518,15 +533,15 @@ export default function DashboardV2() {
           <div className="section-title-content">
             <div className="Page-title">
               <Trans>Stats</Trans> {chainId === AVALANCHE && <img src={avalanche24Icon} alt="avalanche24Icon" />}
-              {chainId === ARBITRUM && <img src={arbitrum24Icon} alt="arbitrum24Icon" />}
+              {chainId === FANTOM && <img src={ftm24Icon} alt="ftm24Icon" />}
             </div>
             <div className="Page-description">
               <Trans>
                 {chainName} Total Stats start from {totalStatsStartDate}.<br /> For detailed stats:
               </Trans>{" "}
-              {chainId === ARBITRUM && <ExternalLink href="https://stats.gmx.io">https://stats.gmx.io</ExternalLink>}
+              {chainId === FANTOM && <ExternalLink href="https://stats.mummy.finance">https://stats.mummy.finance</ExternalLink>}
               {chainId === AVALANCHE && (
-                <ExternalLink href="https://stats.gmx.io/avalanche">https://stats.gmx.io/avalanche</ExternalLink>
+                <ExternalLink href="https://stats.mummy.finance/avalanche">https://stats.mummy.finance/avalanche</ExternalLink>
               )}
               .
             </div>
@@ -549,27 +564,20 @@ export default function DashboardV2() {
                       handle={`$${formatAmount(tvl, USD_DECIMALS, 0, true)}`}
                       position="right-bottom"
                       renderContent={() => (
-                        <span>{t`Assets Under Management: GMX staked (All chains) + GLP pool (${chainName}).`}</span>
+                        <span>{`Assets Under Management: MMY staked (All chains) + MLP pool (${chainName})`}</span>
                       )}
                     />
                   </div>
                 </div>
                 <div className="App-card-row">
                   <div className="label">
-                    <Trans>GLP Pool</Trans>
+                    <Trans>MLP Pool</Trans>
                   </div>
                   <div>
                     <TooltipComponent
                       handle={`$${formatAmount(aum, USD_DECIMALS, 0, true)}`}
                       position="right-bottom"
-                      renderContent={() => (
-                        <Trans>
-                          <p>Total value of tokens in GLP pool ({chainName}).</p>
-                          <p>
-                            Other websites may show a higher value as they add positions' collaterals to the GLP pool.
-                          </p>
-                        </Trans>
-                      )}
+                      renderContent={() => <span>{t`Total value of tokens in MLP pool (${chainName})`}</span>}
                     />
                   </div>
                 </div>
@@ -578,7 +586,8 @@ export default function DashboardV2() {
                     <Trans>24h Volume</Trans>
                   </div>
                   <div>
-                    <TooltipComponent
+                  {`$${formatAmount(dataStats?.[0].volume24H, USD_DECIMALS, 0, true)}`}
+                    {/* <TooltipComponent
                       position="right-bottom"
                       className="nowrap"
                       handle={`$${formatAmount(currentVolumeInfo?.[chainId]?.totalVolume, USD_DECIMALS, 0, true)}`}
@@ -590,7 +599,7 @@ export default function DashboardV2() {
                           total={currentVolumeInfo?.totalVolume}
                         />
                       )}
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div className="App-card-row">
@@ -598,7 +607,13 @@ export default function DashboardV2() {
                     <Trans>Long Positions</Trans>
                   </div>
                   <div>
-                    <TooltipComponent
+                  {`$${formatAmount(
+                        dataStats?.[0].longOpenInterest,
+                        USD_DECIMALS,
+                        0,
+                        true
+                      )}`}
+                    {/* <TooltipComponent
                       position="right-bottom"
                       className="nowrap"
                       handle={`$${formatAmount(
@@ -615,7 +630,7 @@ export default function DashboardV2() {
                           total={positionStatsInfo?.totalLongPositionSizes}
                         />
                       )}
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div className="App-card-row">
@@ -623,7 +638,13 @@ export default function DashboardV2() {
                     <Trans>Short Positions</Trans>
                   </div>
                   <div>
-                    <TooltipComponent
+                  {`$${formatAmount(
+                        dataStats?.[0].shortOpenInterest,
+                        USD_DECIMALS,
+                        0,
+                        true
+                      )}`}
+                    {/* <TooltipComponent
                       position="right-bottom"
                       className="nowrap"
                       handle={`$${formatAmount(
@@ -640,31 +661,20 @@ export default function DashboardV2() {
                           total={positionStatsInfo?.totalShortPositionSizes}
                         />
                       )}
-                    />
+                    /> */}
                   </div>
                 </div>
-                {feesSummary.lastUpdatedAt ? (
+                {/* {feesSummary.lastUpdatedAt ? (
                   <div className="App-card-row">
                     <div className="label">
                       <Trans>Fees since</Trans> {formatDate(feesSummary.lastUpdatedAt)}
                     </div>
                     <div>
-                      <TooltipComponent
-                        position="right-bottom"
-                        className="nowrap"
-                        handle={`$${formatAmount(currentFees?.[chainId], USD_DECIMALS, 2, true)}`}
-                        renderContent={() => (
-                          <StatsTooltip
-                            title={t`Fees`}
-                            arbitrumValue={currentFees?.[ARBITRUM]}
-                            avaxValue={currentFees?.[AVALANCHE]}
-                            total={currentFees?.total}
-                          />
-                        )}
-                      />
+                    {`$${formatAmount(currentFees?.[chainId], USD_DECIMALS, 2, true)}`}
+                      
                     </div>
                   </div>
-                ) : null}
+                ) : null} */}
               </div>
             </div>
             <div className="App-card">
@@ -678,7 +688,8 @@ export default function DashboardV2() {
                     <Trans>Total Fees</Trans>
                   </div>
                   <div>
-                    <TooltipComponent
+                  {`$${formatAmount(dataStats?.[0].totalFees, USD_DECIMALS, 0, true)}`}
+                    {/* <TooltipComponent
                       position="right-bottom"
                       className="nowrap"
                       handle={`$${numberWithCommas(totalFees?.[chainId])}`}
@@ -691,7 +702,7 @@ export default function DashboardV2() {
                           decimalsForConversion={0}
                         />
                       )}
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div className="App-card-row">
@@ -699,7 +710,8 @@ export default function DashboardV2() {
                     <Trans>Total Volume</Trans>
                   </div>
                   <div>
-                    <TooltipComponent
+                  {`$${formatAmount(dataStats?.[0].totalVolume, USD_DECIMALS, 0, true)}`}
+                    {/* <TooltipComponent
                       position="right-bottom"
                       className="nowrap"
                       handle={`$${formatAmount(totalVolume?.[chainId], USD_DECIMALS, 0, true)}`}
@@ -711,15 +723,15 @@ export default function DashboardV2() {
                           total={totalVolume?.total}
                         />
                       )}
-                    />
+                    /> */}
                   </div>
                 </div>
-                <div className="App-card-row">
+                {/* <div className="App-card-row">
                   <div className="label">
                     <Trans>Floor Price Fund</Trans>
                   </div>
                   <div>${formatAmount(totalFloorPriceFundUsd, 30, 0, true)}</div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -727,9 +739,10 @@ export default function DashboardV2() {
             <div className="Page-title">
               <Trans>Tokens</Trans> {chainId === AVALANCHE && <img src={avalanche24Icon} alt="avalanche24Icon" />}
               {chainId === ARBITRUM && <img src={arbitrum24Icon} alt="arbitrum24Icon" />}
+              {chainId === FANTOM && <img src={ftm24Icon} alt="ftm24Icon" />}
             </div>
             <div className="Page-description">
-              <Trans>Platform and GLP index tokens.</Trans>
+              <Trans>Platform and MLP index tokens.</Trans>
             </div>
           </div>
           <div className="DashboardV2-token-cards">
@@ -739,11 +752,11 @@ export default function DashboardV2() {
                   <div className="App-card-title">
                     <div className="App-card-title-mark">
                       <div className="App-card-title-mark-icon">
-                        <img src={gmx40Icon} alt="GMX Token Icon" />
+                        <img src={gmx40Icon} alt="MMY Token Icon" />
                       </div>
                       <div className="App-card-title-mark-info">
-                        <div className="App-card-title-mark-title">GMX</div>
-                        <div className="App-card-title-mark-subtitle">GMX</div>
+                        <div className="App-card-title-mark-title">MMY</div>
+                        <div className="App-card-title-mark-subtitle">MMY</div>
                       </div>
                       <div>
                         <AssetDropdown assetSymbol="GMX" />
@@ -759,25 +772,26 @@ export default function DashboardV2() {
                       <div>
                         {!gmxPrice && "..."}
                         {gmxPrice && (
-                          <TooltipComponent
-                            position="right-bottom"
-                            className="nowrap"
-                            handle={"$" + formatAmount(gmxPrice, USD_DECIMALS, 2, true)}
-                            renderContent={() => (
-                              <>
-                                <StatsTooltipRow
-                                  label={t`Price on Arbitrum`}
-                                  value={formatAmount(gmxPriceFromArbitrum, USD_DECIMALS, 2, true)}
-                                  showDollar={true}
-                                />
-                                <StatsTooltipRow
-                                  label={t`Price on Avalanche`}
-                                  value={formatAmount(gmxPriceFromAvalanche, USD_DECIMALS, 2, true)}
-                                  showDollar={true}
-                                />
-                              </>
-                            )}
-                          />
+                          "$" + formatAmount(gmxPrice, USD_DECIMALS, 3, true)
+                          // <TooltipComponent
+                          //   position="right-bottom"
+                          //   className="nowrap"
+                          //   handle={"$" + formatAmount(gmxPrice, USD_DECIMALS, 2, true)}
+                          //   renderContent={() => (
+                          //     <>
+                          //       <StatsTooltipRow
+                          //         label={t`Price on Arbitrum`}
+                          //         value={formatAmount(gmxPriceFromArbitrum, USD_DECIMALS, 2, true)}
+                          //         showDollar={true}
+                          //       />
+                          //       <StatsTooltipRow
+                          //         label={t`Price on Avalanche`}
+                          //         value={formatAmount(gmxPriceFromAvalanche, USD_DECIMALS, 2, true)}
+                          //         showDollar={true}
+                          //       />
+                          //     </>
+                          //   )}
+                          // />
                         )}
                       </div>
                     </div>
@@ -785,14 +799,15 @@ export default function DashboardV2() {
                       <div className="label">
                         <Trans>Supply</Trans>
                       </div>
-                      <div>{formatAmount(totalGmxSupply, GMX_DECIMALS, 0, true)} GMX</div>
+                      <div>{formatAmount(totalGmxSupply, GMX_DECIMALS, 0, true)} MMY</div>
                     </div>
                     <div className="App-card-row">
                       <div className="label">
                         <Trans>Total Staked</Trans>
                       </div>
                       <div>
-                        <TooltipComponent
+                      {`$${formatAmount(stakedGmxSupplyUsd, USD_DECIMALS, 2, true)}`}
+                        {/* <TooltipComponent
                           position="right-bottom"
                           className="nowrap"
                           handle={`$${formatAmount(stakedGmxSupplyUsd, USD_DECIMALS, 0, true)}`}
@@ -806,7 +821,7 @@ export default function DashboardV2() {
                               showDollar={false}
                             />
                           )}
-                        />
+                        /> */}
                       </div>
                     </div>
                     <div className="App-card-row">
@@ -864,16 +879,16 @@ export default function DashboardV2() {
                   <div className="App-card-title">
                     <div className="App-card-title-mark">
                       <div className="App-card-title-mark-icon">
-                        <img src={glp40Icon} alt="glp40Icon" />
+                        <img src={glp40Icon} alt="mlp40Icon" />
                         {chainId === ARBITRUM ? (
                           <img src={arbitrum16Icon} alt={t`Arbitrum Icon`} className="selected-network-symbol" />
                         ) : (
-                          <img src={avalanche16Icon} alt={t`Avalanche Icon`} className="selected-network-symbol" />
+                          <img src={ftm16Icon} alt={t`Fantom Icon`} className="selected-network-symbol" />
                         )}
                       </div>
                       <div className="App-card-title-mark-info">
-                        <div className="App-card-title-mark-title">GLP</div>
-                        <div className="App-card-title-mark-subtitle">GLP</div>
+                        <div className="App-card-title-mark-title">MLP</div>
+                        <div className="App-card-title-mark-subtitle">MLP</div>
                       </div>
                       <div>
                         <AssetDropdown assetSymbol="GLP" />
@@ -892,7 +907,7 @@ export default function DashboardV2() {
                       <div className="label">
                         <Trans>Supply</Trans>
                       </div>
-                      <div>{formatAmount(glpSupply, GLP_DECIMALS, 0, true)} GLP</div>
+                      <div>{formatAmount(glpSupply, GLP_DECIMALS, 0, true)} MLP</div>
                     </div>
                     <div className="App-card-row">
                       <div className="label">
@@ -949,7 +964,7 @@ export default function DashboardV2() {
                         ))}
                       </Pie>
                       <text x={"50%"} y={"50%"} fill="white" textAnchor="middle" dominantBaseline="middle">
-                        GLP Pool
+                        MLP Pool
                       </text>
                       <Tooltip content={<CustomTooltip />} />
                     </PieChart>
@@ -959,9 +974,10 @@ export default function DashboardV2() {
             </div>
             <div className="token-table-wrapper App-card">
               <div className="App-card-title">
-                <Trans>GLP Index Composition</Trans>{" "}
+                <Trans>MLP Index Composition</Trans>{" "}
                 {chainId === AVALANCHE && <img src={avalanche16Icon} alt={t`Avalanche Icon`} />}
                 {chainId === ARBITRUM && <img src={arbitrum16Icon} alt={t`Arbitrum Icon`} />}
+                {chainId === FANTOM && <img src={ftm16Icon} alt={t`Fantom Icon`} />}
               </div>
               <div className="App-card-divider"></div>
               <table className="token-table">
@@ -1015,25 +1031,24 @@ export default function DashboardV2() {
                             </div>
                           </div>
                         </td>
-                        <td>${formatKeyAmount(tokenInfo, "minPrice", USD_DECIMALS, 2, true)}</td>
+                        <td>${formatKeyAmount(tokenInfo, "minPrice", USD_DECIMALS, tokenInfo?.displayDecimals || 2, true)}</td>
                         <td>
                           <TooltipComponent
                             handle={`$${formatKeyAmount(tokenInfo, "managedUsd", USD_DECIMALS, 0, true)}`}
                             position="right-bottom"
-                            className="nowrap"
                             renderContent={() => {
                               return (
                                 <>
                                   <StatsTooltipRow
                                     label={t`Pool Amount`}
-                                    value={`${formatKeyAmount(tokenInfo, "managedAmount", token.decimals, 0, true)} ${
+                                    value={`${formatKeyAmount(tokenInfo, "managedAmount", token.decimals, 4, true)} ${
                                       token.symbol
                                     }`}
                                     showDollar={false}
                                   />
                                   <StatsTooltipRow
                                     label={t`Target Min Amount`}
-                                    value={`${formatKeyAmount(tokenInfo, "bufferAmount", token.decimals, 0, true)} ${
+                                    value={`${formatKeyAmount(tokenInfo, "bufferAmount", token.decimals, 4, true)} ${
                                       token.symbol
                                     }`}
                                     showDollar={false}
@@ -1086,7 +1101,7 @@ export default function DashboardV2() {
                         <div className="label">
                           <Trans>Price</Trans>
                         </div>
-                        <div>${formatKeyAmount(tokenInfo, "minPrice", USD_DECIMALS, 2, true)}</div>
+                        <div>${formatKeyAmount(tokenInfo, "minPrice", USD_DECIMALS, tokenInfo?.displayDecimals || 2, true)}</div>
                       </div>
                       <div className="App-card-row">
                         <div className="label">
