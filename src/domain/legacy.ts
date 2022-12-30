@@ -15,7 +15,7 @@ import Token from "abis/Token.json";
 import PositionRouter from "abis/PositionRouter.json";
 
 import { getContract } from "config/contracts";
-import { ARBITRUM, ARBITRUM_TESTNET, AVALANCHE, getConstant, getHighExecutionFee } from "config/chains";
+import { ARBITRUM, ARBITRUM_TESTNET, AVALANCHE, FANTOM, getConstant, getHighExecutionFee } from "config/chains";
 import { DECREASE, getOrderKey, INCREASE, SWAP, USD_DECIMALS } from "lib/legacy";
 
 import { groupBy } from "lodash";
@@ -392,6 +392,10 @@ export function useMinExecutionFee(library, active, chainId, infoTokens) {
 
   // multiplier for Avalanche is just the average gas usage
   if (chainId === AVALANCHE) {
+    multiplier = 700000;
+  }
+
+  if (chainId === FANTOM) {
     multiplier = 700000;
   }
 

@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { getContract } from "./contracts";
-import { ARBITRUM, ARBITRUM_TESTNET, AVALANCHE, AVALANCHE_FUJI, MAINNET, TESTNET } from "./chains";
+import { ARBITRUM, ARBITRUM_TESTNET, AVALANCHE, MAINNET, TESTNET, FANTOM, MUMBAI} from "./chains";
 import { Token } from "domain/tokens";
 
 export const TOKENS: { [chainId: number]: Token[] } = {
@@ -327,40 +327,128 @@ export const TOKENS: { [chainId: number]: Token[] } = {
       imageUrl: "https://assets.coingecko.com/coins/images/16786/small/mimlogopng.png",
     },
   ],
-  [AVALANCHE_FUJI]: [
+  [FANTOM]: [
     {
-      name: "Avalanche",
-      symbol: "AVAX",
+      name: "FTM",
+      symbol: "FTM",
       decimals: 18,
+      //displayDecimals: 4,
       address: ethers.constants.AddressZero,
       isNative: true,
       isShortable: true,
-      imageUrl: "https://assets.coingecko.com/coins/images/12559/small/coin-round-red.png?1604021818",
+      imageUrl: "https://assets.coingecko.com/coins/images/4001/small/Fantom_round.png?1669652346",
     },
     {
-      name: "Wrapped AVAX",
-      symbol: "WAVAX",
+      name: "Wrapped FTM",
+      symbol: "WFTM",
       decimals: 18,
-      address: "0x1D308089a2D1Ced3f1Ce36B1FcaF815b07217be3",
+      //displayDecimals: 4,
+      address: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
       isWrapped: true,
-      baseSymbol: "AVAX",
-      imageUrl: "https://assets.coingecko.com/coins/images/12559/small/coin-round-red.png?1604021818",
+      baseSymbol: "FTM",
+      imageUrl: "https://ftmscan.com/token/images/wFtm_32.png",
     },
     {
-      name: "Ethereum (WETH.e)",
+      name: "Ethereum",
       symbol: "ETH",
-      address: "0x8226EC2c1926c9162b6F815153d10018A7ccdf07",
+      address: "0x74b23882a30290451A17c44f4F05243b6b58C76d",
       decimals: 18,
       isShortable: true,
       imageUrl: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
     },
     {
+      name: "Bitcoin",
+      symbol: "BTC",
+      address: "0x321162Cd933E2Be498Cd2267a90534A804051b11",
+      decimals: 8,
+      isShortable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/26115/thumb/btcb.png?1655921693",
+    },
+    {
       name: "USD Coin",
       symbol: "USDC",
-      address: "0xC492c8d82DC576Ad870707bb40EDb63E2026111E",
+      address: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
       decimals: 6,
       isStable: true,
       imageUrl: "https://assets.coingecko.com/coins/images/6319/thumb/USD_Coin_icon.png?1547042389",
+    },
+    {
+      name: "Tether",
+      symbol: "USDT",
+      address: "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
+      decimals: 6,
+      isStable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/325/small/Tether-logo.png",
+    },
+    {
+      name: "DAI",
+      symbol: "DAI",
+      decimals: 18,
+      address: "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
+      isStable: true,
+      imageUrl: "https://optimistic.etherscan.io/token/images/MCDDai_32.png",
+    },
+  ],
+  [MUMBAI]: [
+    {
+      name: "FTM",
+      symbol: "FTM",
+      decimals: 18,
+      //displayDecimals: 3,
+      address: ethers.constants.AddressZero,
+      isNative: true,
+      isShortable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/4001/small/Fantom_round.png?1669652346",
+    },
+    {
+      name: "Wrapped FTM",
+      symbol: "WFTM",
+      decimals: 18,
+      //displayDecimals: 3,
+      address: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+      isWrapped: true,
+      baseSymbol: "FTM",
+      imageUrl: "https://ftmscan.com/token/images/wFtm_32.png",
+    },
+    {
+      name: "Ethereum",
+      symbol: "ETH",
+      address: "0x74b23882a30290451A17c44f4F05243b6b58C76d",
+      decimals: 18,
+      isShortable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+    },
+    {
+      name: "Bitcoin",
+      symbol: "BTC",
+      address: "0x321162Cd933E2Be498Cd2267a90534A804051b11",
+      decimals: 8,
+      isShortable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/26115/thumb/btcb.png?1655921693",
+    },
+    {
+      name: "USD Coin",
+      symbol: "USDC",
+      address: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
+      decimals: 6,
+      isStable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/6319/thumb/USD_Coin_icon.png?1547042389",
+    },
+    {
+      name: "Tether",
+      symbol: "USDT",
+      address: "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
+      decimals: 6,
+      isStable: true,
+      imageUrl: "https://assets.coingecko.com/coins/images/325/small/Tether-logo.png",
+    },
+    {
+      name: "DAI",
+      symbol: "DAI",
+      decimals: 18,
+      address: "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
+      isStable: true,
+      imageUrl: "https://optimistic.etherscan.io/token/images/MCDDai_32.png",
     },
   ],
 };
@@ -375,7 +463,7 @@ export const ADDITIONAL_TOKENS: { [chainId: number]: Token[] } = {
       imageUrl: "https://assets.coingecko.com/coins/images/18323/small/arbit.png?1631532468",
     },
     {
-      name: "Escrowed GMX",
+      name: "Escrowed MMY",
       symbol: "esGMX",
       address: getContract(ARBITRUM, "ES_GMX"),
       decimals: 18,
@@ -397,7 +485,7 @@ export const ADDITIONAL_TOKENS: { [chainId: number]: Token[] } = {
       imageUrl: "https://assets.coingecko.com/coins/images/18323/small/arbit.png?1631532468",
     },
     {
-      name: "Escrowed GMX",
+      name: "Escrowed MMY",
       symbol: "esGMX",
       address: getContract(AVALANCHE, "ES_GMX"),
       decimals: 18,
@@ -406,6 +494,28 @@ export const ADDITIONAL_TOKENS: { [chainId: number]: Token[] } = {
       name: "GMX LP",
       symbol: "GLP",
       address: getContract(ARBITRUM, "GLP"),
+      decimals: 18,
+      imageUrl: "https://github.com/gmx-io/gmx-assets/blob/main/GMX-Assets/PNG/GLP_LOGO%20ONLY.png?raw=true",
+    },
+  ],
+  [FANTOM]: [
+    {
+      name: "GMX",
+      symbol: "GMX",
+      address: getContract(FANTOM, "GMX"),
+      decimals: 18,
+      imageUrl: "https://assets.coingecko.com/coins/images/18323/small/arbit.png?1631532468",
+    },
+    {
+      name: "Escrowed MMY",
+      symbol: "esGMX",
+      address: getContract(FANTOM, "ES_GMX"),
+      decimals: 18,
+    },
+    {
+      name: "GMX LP",
+      symbol: "GLP",
+      address: getContract(FANTOM, "GLP"),
       decimals: 18,
       imageUrl: "https://github.com/gmx-io/gmx-assets/blob/main/GMX-Assets/PNG/GLP_LOGO%20ONLY.png?raw=true",
     },
@@ -447,6 +557,22 @@ export const PLATFORM_TOKENS: { [chainId: number]: { [symbol: string]: Token } }
       imageUrl: "https://github.com/gmx-io/gmx-assets/blob/main/GMX-Assets/PNG/GLP_LOGO%20ONLY.png?raw=true",
     },
   },
+  [FANTOM]: {
+    // avalanche
+    GMX: {
+      name: "MMY",
+      symbol: "MMY",
+      decimals: 18,
+      address: getContract(FANTOM, "GMX"),
+      imageUrl: "https://assets.coingecko.com/coins/images/28547/small/Logo_MMY.png?1671599329",
+    },
+    GLP: {
+      name: "MMY LP",
+      symbol: "MLP",
+      decimals: 18,
+      address: getContract(FANTOM, "StakedGlpTracker"), // address of fsGLP token because user only holds fsGLP
+    },
+  },
 };
 
 export const ICONLINKS = {
@@ -459,6 +585,42 @@ export const ICONLINKS = {
       arbitrum: "https://testnet.arbiscan.io/token/0xb4f81Fa74e06b5f762A104e47276BA9b2929cb27",
     },
   },
+  [FANTOM]: {
+    GMX: {
+      coingecko: "https://www.coingecko.com/en/coins/mummy-finance",
+      fantom: "https://ftmscan.com/address/0x9CB7beAEcdE90a682BDb86AaA32EF032bD9e4079",
+    },
+    GLP: {
+      fantom: "https://ftmscan.com/token/0xcf4D627f1bb9aB2deC8Ec4c928686b2b4165Ec73",
+    },
+    ETH: {
+      coingecko: "https://www.coingecko.com/en/coins/ethereum",
+    },
+    BTC: {
+      coingecko: "https://www.coingecko.com/en/coins/wrapped-bitcoin",
+      fantom: "https://ftmscan.com/address/0x321162cd933e2be498cd2267a90534a804051b11",
+    },
+    LINK: {
+      coingecko: "https://www.coingecko.com/en/coins/chainlink",
+      fantom: "https://ftmscan.com/address/0xf97f4df75117a78c1a5a0dbb814af92458539fb4",
+    },
+    USDC: {
+      coingecko: "https://www.coingecko.com/en/coins/usd-coin",
+      fantom: "https://ftmscan.com/address/0x04068da6c83afcfa0e13ba15a6696662335d5b75",
+    },
+    USDT: {
+      coingecko: "https://www.coingecko.com/en/coins/tether",
+      fantom: "https://ftmscan.com/address/0x049d68029688eabf473097a2fc38ef61633a3c7a",
+    },
+    DAI: {
+      coingecko: "https://www.coingecko.com/en/coins/dai",
+      fantom: "https://ftmscan.com/address/0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
+    },
+    FTM: {
+      coingecko: "https://www.coingecko.com/en/coins/fantom",
+      fantom: "https://ftmscan.com/address/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+    },
+  },
   [ARBITRUM]: {
     GMX: {
       coingecko: "https://www.coingecko.com/en/coins/gmx",
@@ -466,7 +628,7 @@ export const ICONLINKS = {
     },
     GLP: {
       arbitrum: "https://arbiscan.io/token/0x1aDDD80E6039594eE970E5872D247bf0414C8903",
-      reserves: "https://portfolio.nansen.ai/dashboard/gmx?chain=ARBITRUM",
+      reserves: "https://arbiscan.io/address/0x489ee077994b6658eafa855c308275ead8097c4a",
     },
     ETH: {
       coingecko: "https://www.coingecko.com/en/coins/ethereum",
@@ -511,7 +673,7 @@ export const ICONLINKS = {
     },
     GLP: {
       avalanche: "https://snowtrace.io/address/0x9e295B5B976a184B14aD8cd72413aD846C299660",
-      reserves: "https://portfolio.nansen.ai/dashboard/gmx?chain=AVAX",
+      reserves: "https://core.app/account/0x9ab2De34A33fB459b538c43f251eB825645e8595",
     },
     AVAX: {
       coingecko: "https://www.coingecko.com/en/coins/avalanche",
@@ -541,19 +703,6 @@ export const ICONLINKS = {
       avalanche: "https://snowtrace.io/address/0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664",
     },
   },
-  [AVALANCHE_FUJI]: {
-    AVAX: {
-      coingecko: "https://www.coingecko.com/en/coins/avalanche",
-    },
-    ETH: {
-      coingecko: "https://www.coingecko.com/en/coins/weth",
-      avalanche: "https://testnet.snowtrace.io/address/0x8226EC2c1926c9162b6F815153d10018A7ccdf07",
-    },
-    USDC: {
-      coingecko: "https://www.coingecko.com/en/coins/usd-coin",
-      avalanche: "https://testnet.snowtrace.io/address/0xC492c8d82DC576Ad870707bb40EDb63E2026111E",
-    },
-  },
 };
 
 export const GLP_POOL_COLORS = {
@@ -568,6 +717,7 @@ export const GLP_POOL_COLORS = {
   DAI: "#FAC044",
   UNI: "#E9167C",
   AVAX: "#E84142",
+  FTM: "#E84142",
   LINK: "#3256D6",
 };
 
@@ -576,7 +726,7 @@ export const TOKENS_BY_SYMBOL_MAP: { [chainId: number]: { [symbol: string]: Toke
 export const WRAPPED_TOKENS_MAP: { [chainId: number]: Token } = {};
 export const NATIVE_TOKENS_MAP: { [chainId: number]: Token } = {};
 
-const CHAIN_IDS = [MAINNET, TESTNET, ARBITRUM, ARBITRUM_TESTNET, AVALANCHE, AVALANCHE_FUJI];
+const CHAIN_IDS = [MAINNET, TESTNET, ARBITRUM, ARBITRUM_TESTNET, AVALANCHE, FANTOM];
 
 for (let j = 0; j < CHAIN_IDS.length; j++) {
   const chainId = CHAIN_IDS[j];
