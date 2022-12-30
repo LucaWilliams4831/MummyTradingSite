@@ -18,7 +18,6 @@ import {
 
 import Home from "pages/Home/Home";
 import Dashboard from "pages/Dashboard/Dashboard";
-import Ecosystem from "pages/Ecosystem/Ecosystem";
 import Stake from "pages/Stake/Stake";
 import { Exchange } from "pages/Exchange/Exchange";
 import Actions from "pages/Actions/Actions";
@@ -505,9 +504,6 @@ function FullApp() {
               </Route>
               <Route exact path="/buy_gmx">
                 <BuyGMX />
-              </Route>
-              <Route exact path="/ecosystem">
-                <Ecosystem />
               </Route>
               <Route exact path="/referrals">
                 <Referrals pendingTxns={pendingTxns} connectWallet={connectWallet} setPendingTxns={setPendingTxns} />
