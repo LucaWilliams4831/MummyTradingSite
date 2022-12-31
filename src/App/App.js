@@ -68,7 +68,7 @@ import { I18nProvider } from "@lingui/react";
 import { Trans, t } from "@lingui/macro";
 import { defaultLocale, dynamicActivate } from "lib/i18n";
 import { Header } from "components/Header/Header";
-import { ARBITRUM, AVALANCHE, getAlchemyWsUrl, getExplorerUrl } from "config/chains";
+import { ARBITRUM, FANTOM, getExplorerUrl } from "config/chains";
 import { useLocalStorageSerializeKey } from "lib/localStorage";
 import { helperToast } from "lib/helperToast";
 import {
@@ -116,21 +116,18 @@ const Zoom = cssTransition({
   duration: 200,
 });
 
-const arbWsProvider = new ethers.providers.WebSocketProvider(getAlchemyWsUrl());
+// const arbWsProvider = new ethers.providers.WebSocketProvider(getAlchemyWsUrl());
 
-const avaxWsProvider = new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc");
-avaxWsProvider.pollingInterval = 2000;
+// const avaxWsProvider = new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc");
+// avaxWsProvider.pollingInterval = 2000;
+const ftmWsProvider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/fantom");
 
 function getWsProvider(active, chainId) {
   if (!active) {
     return;
   }
-  if (chainId === ARBITRUM) {
-    return arbWsProvider;
-  }
-
-  if (chainId === AVALANCHE) {
-    return avaxWsProvider;
+  if (chainId === FANTOM) {
+    return ftmWsProvider;
   }
 }
 

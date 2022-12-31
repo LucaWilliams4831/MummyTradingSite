@@ -43,13 +43,14 @@ import glp40Icon from "img/ic_glp_40.svg";
 import arrowIcon from "img/ic_convert_down.svg";
 
 import avalanche16Icon from "img/ic_avalanche_16.svg";
+import fantom16Icon from "img/ic_arbitrum_16.svg";
 import arbitrum16Icon from "img/ic_arbitrum_16.svg";
 
 import "./GlpSwap.css";
 import AssetDropdown from "pages/Dashboard/AssetDropdown";
 import SwapErrorModal from "./SwapErrorModal";
 import StatsTooltipRow from "../StatsTooltip/StatsTooltipRow";
-import { ARBITRUM, getChainName, IS_NETWORK_DISABLED } from "config/chains";
+import { ARBITRUM, FANTOM, getChainName, IS_NETWORK_DISABLED } from "config/chains";
 import { callContract, contractFetcher } from "lib/contracts";
 import { approveTokens, useInfoTokens } from "domain/tokens";
 import { useLocalStorageByChainId } from "lib/localStorage";

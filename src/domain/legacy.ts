@@ -456,43 +456,31 @@ export function useStakedGmxSupply(library, active) {
 }
 
 export function useHasOutdatedUi() {
-  // const url = getServerUrl(ARBITRUM, "/ui_version");
-  // const { data, mutate } = useSWR([url], {
-  //   // @ts-ignore
-  //   fetcher: (...args) => fetch(...args).then((res) => res.text()),
-  // });
+  const url = getServerUrl(ARBITRUM, "/ui_version");
+  const { data, mutate } = useSWR([url], {
+    // @ts-ignore
+    fetcher: (...args) => fetch(...args).then((res) => res.text()),
+  });
 
   let hasOutdatedUi = false;
 
-  // if (data && parseFloat(data) > parseFloat(UI_VERSION)) {
-  //   hasOutdatedUi = true;
-  // }
+  if (data && parseFloat(data) > parseFloat(UI_VERSION)) {
+    hasOutdatedUi = true;
+  }
 
-  return { data: hasOutdatedUi };
+  return { data: hasOutdatedUi, mutate };
 }
-export function useMMYInfo() {
-  const url = "https://api.mummy.finance/api/tokens/info?symbols=MMY&chain=FANTOM";
-  const { data: data } = useSWR([url], {
-    // @ts-ignore
-    fetcher: (...args) => fetch(...args).then((res) => res.json()),
-  });
-  return {
-    totalSupply: parseValue(data?.MMY?.totalSupply, 18)  || 0,
-    totalGmxSupply: parseValue(data?.MMY?.circulatingSupply, 18) || 0,
-    gmxPrice: parseValue(data?.MMY?.price, USD_DECIMALS) || 0,
-  };
-}
+
 export function useGmxPrice(chainId, libraries, active) {
   const arbitrumLibrary = libraries && libraries.arbitrum ? libraries.arbitrum : undefined;
   const { data: gmxPriceFromArbitrum, mutate: mutateFromArbitrum } = useGmxPriceFromArbitrum(arbitrumLibrary, active);
   const { data: gmxPriceFromAvalanche, mutate: mutateFromAvalanche } = useGmxPriceFromAvalanche();
-  const { data: gmxPriceFromFantom, mutate: mutateFromFantom } = useGmxPriceFromFantom();
 
-
-  const gmxPrice = chainId === FANTOM ? gmxPriceFromFantom : gmxPriceFromAvalanche;
+  const gmxPrice = chainId === ARBITRUM ? gmxPriceFromArbitrum : gmxPriceFromAvalanche;
   const mutate = useCallback(() => {
-    mutateFromFantom();
-  }, [mutateFromFantom, mutateFromArbitrum]);
+    mutateFromAvalanche();
+    mutateFromArbitrum();
+  }, [mutateFromAvalanche, mutateFromArbitrum]);
 
   return {
     gmxPrice,
@@ -520,39 +508,26 @@ export function useTotalGmxSupply() {
 export function useTotalGmxStaked() {
   const stakedGmxTrackerAddressArbitrum = getContract(ARBITRUM, "StakedGmxTracker");
   const stakedGmxTrackerAddressAvax = getContract(AVALANCHE, "StakedGmxTracker");
-  const stakedGmxTrackerAddressFtm = getContract(FANTOM, "StakedGmxTracker");
   let totalStakedGmx = useRef(bigNumberify(0));
-  // const { data: stakedGmxSupplyArbitrum, mutate: updateStakedGmxSupplyArbitrum } = useSWR<BigNumber>(
-  //   [
-  //     `StakeV2:stakedGmxSupply:${ARBITRUM}`,
-  //     ARBITRUM,
-  //     getContract(ARBITRUM, "GMX"),
-  //     "balanceOf",
-  //     stakedGmxTrackerAddressArbitrum,
-  //   ],
-  //   {
-  //     fetcher: contractFetcher(undefined, Token),
-  //   }
-  // );
-  // const { data: stakedGmxSupplyAvax, mutate: updateStakedGmxSupplyAvax } = useSWR<BigNumber>(
-  //   [
-  //     `StakeV2:stakedGmxSupply:${AVALANCHE}`,
-  //     AVALANCHE,
-  //     getContract(AVALANCHE, "GMX"),
-  //     "balanceOf",
-  //     stakedGmxTrackerAddressAvax,
-  //   ],
-  //   {
-  //     fetcher: contractFetcher(undefined, Token),
-  //   }
-  // );
-  const { data: stakedGmxSupplyFtm, mutate: updateStakedGmxSupplyFtm } = useSWR<BigNumber>(
+  const { data: stakedGmxSupplyArbitrum, mutate: updateStakedGmxSupplyArbitrum } = useSWR<BigNumber>(
     [
-      `StakeV2:stakedGmxSupply:${FANTOM}`,
-      FANTOM,
-      getContract(FANTOM, "GMX"),
+      `StakeV2:stakedGmxSupply:${ARBITRUM}`,
+      ARBITRUM,
+      getContract(ARBITRUM, "GMX"),
       "balanceOf",
-      stakedGmxTrackerAddressFtm,
+      stakedGmxTrackerAddressArbitrum,
+    ],
+    {
+      fetcher: contractFetcher(undefined, Token),
+    }
+  );
+  const { data: stakedGmxSupplyAvax, mutate: updateStakedGmxSupplyAvax } = useSWR<BigNumber>(
+    [
+      `StakeV2:stakedGmxSupply:${AVALANCHE}`,
+      AVALANCHE,
+      getContract(AVALANCHE, "GMX"),
+      "balanceOf",
+      stakedGmxTrackerAddressAvax,
     ],
     {
       fetcher: contractFetcher(undefined, Token),
@@ -560,19 +535,18 @@ export function useTotalGmxStaked() {
   );
 
   const mutate = useCallback(() => {
-    // updateStakedGmxSupplyArbitrum();
-    // updateStakedGmxSupplyAvax();
-    updateStakedGmxSupplyFtm();
-  }, [updateStakedGmxSupplyFtm]);
+    updateStakedGmxSupplyArbitrum();
+    updateStakedGmxSupplyAvax();
+  }, [updateStakedGmxSupplyArbitrum, updateStakedGmxSupplyAvax]);
 
-  if (stakedGmxSupplyFtm) {
-    let total = bigNumberify(stakedGmxSupplyFtm);
+  if (stakedGmxSupplyArbitrum && stakedGmxSupplyAvax) {
+    let total = bigNumberify(stakedGmxSupplyArbitrum)!.add(stakedGmxSupplyAvax);
     totalStakedGmx.current = total;
   }
 
   return {
-    // avax: stakedGmxSupplyAvax,
-    // arbitrum: stakedGmxSupplyArbitrum,
+    avax: stakedGmxSupplyAvax,
+    arbitrum: stakedGmxSupplyArbitrum,
     total: totalStakedGmx.current,
     mutate,
   };
@@ -610,38 +584,6 @@ export function useTotalGmxInLiquidity() {
     total: totalGMX.current,
     mutate,
   };
-}
-
-function useGmxPriceFromFantom() {
-  const poolAddress = getContract(FANTOM, "UniswapGmxEthPool");
-
-  const { data, mutate: updateReserves } = useSWR(["TraderJoeGmxFantomReserves", FANTOM, poolAddress, "getReserves"], {
-    fetcher: contractFetcher(undefined, UniswapV2),
-  });
-  const { _reserve0: gmxReserve, _reserve1: avaxReserve }: any = data || {};
-
-  const vaultAddress = getContract(FANTOM, "Vault");
-  const usdcAddress = getTokenBySymbol(FANTOM, "USDC").address;
-  const { data: usdcPrice, mutate: updateUsdcPrice } = useSWR(
-    [`StakeV2:usdcPrice`, FANTOM, vaultAddress, "getMinPrice", usdcAddress],
-    {
-      fetcher: contractFetcher(undefined, Vault),
-    }
-  );
-
-  const PRECISION = bigNumberify(10)!.pow(18);
-  const PRECISION_USDC = bigNumberify(10)!.pow(6);
-  let gmxPrice;
-  if (avaxReserve && gmxReserve && usdcPrice) {
-    gmxPrice = avaxReserve.mul(PRECISION).div(gmxReserve).mul(usdcPrice).div(PRECISION_USDC);
-  }
-
-  const mutate = useCallback(() => {
-    updateReserves(undefined, true);
-    updateUsdcPrice(undefined, true);
-  }, [updateReserves, updateUsdcPrice]);
-
-  return { data: gmxPrice, mutate };
 }
 
 function useGmxPriceFromAvalanche() {

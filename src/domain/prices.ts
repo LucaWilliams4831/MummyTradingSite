@@ -57,7 +57,7 @@ function fillGaps(prices, periodSeconds) {
 }
 
 async function getChartPricesFromStats(chainId, symbol, period) {
-  if (["WBTC", "WETH", "WAVAX"].includes(symbol)) {
+  if (["WBTC", "WETH", "WFTM"].includes(symbol)) {
     symbol = symbol.substr(1);
   } else if (symbol === "BTC.b") {
     symbol = "BTC";
@@ -159,7 +159,7 @@ function getCandlesFromPrices(prices, period) {
 }
 
 function getChainlinkChartPricesFromGraph(tokenSymbol, period) {
-  if (["WBTC", "WETH", "WAVAX"].includes(tokenSymbol)) {
+  if (["WBTC", "WETH", "WFTM"].includes(tokenSymbol)) {
     tokenSymbol = tokenSymbol.substr(1);
   }
   const marketName = tokenSymbol + "_USD";
@@ -263,7 +263,7 @@ function appendCurrentAveragePrice(prices, currentAveragePrice, period) {
   const periodSeconds = CHART_PERIODS[period];
   const currentCandleTime = Math.floor(Date.now() / 1000 / periodSeconds) * periodSeconds + timezoneOffset;
   const last = prices[prices.length - 1];
-  const averagePriceValue = parseFloat(formatAmount(currentAveragePrice, USD_DECIMALS, 2));
+  const averagePriceValue = parseFloat(formatAmount(currentAveragePrice, USD_DECIMALS, 5));
   if (currentCandleTime === last.time) {
     last.close = averagePriceValue;
     last.high = Math.max(last.high, averagePriceValue);
